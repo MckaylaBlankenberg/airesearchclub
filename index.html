@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI Research Club — connect, explore, research, build and grow." />
+  <title>AI Research Club</title>
+  <style>
+    :root {
+      --navy: #071a2f;
+      --navy-2: #0b2440;
+      --cyan: #31e6ff;
+      --purple: #9b5cff;
+      --lime: #d4ff42;
+      --white: #f7fbff;
+      --muted: #b7c7d9;
+      --card: rgba(255,255,255,.07);
+      --border: rgba(255,255,255,.14);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(49,230,255,.16), transparent 32%),
+        radial-gradient(circle at 85% 20%, rgba(155,92,255,.18), transparent 32%),
+        linear-gradient(145deg, var(--navy), var(--navy-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 18px;
+    }
+    .wrap { width: min(960px, 100%); }
+    .hero { text-align: center; margin-bottom: 28px; }
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 13px;
+      border: 1px solid rgba(49,230,255,.35);
+      border-radius: 999px;
+      color: var(--cyan);
+      font-weight: 800;
+      letter-spacing: .08em;
+      font-size: .8rem;
+      text-transform: uppercase;
+      background: rgba(49,230,255,.08);
+    }
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(2.4rem, 7vw, 5.6rem);
+      line-height: .95;
+      letter-spacing: -.05em;
+    }
+    .gradient {
+      background: linear-gradient(90deg, var(--cyan), var(--purple), var(--lime));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .tagline {
+      margin: 0 auto 14px;
+      max-width: 700px;
+      font-size: clamp(1.15rem, 2.5vw, 1.55rem);
+      font-weight: 800;
+    }
+    .intro {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.03rem;
+      line-height: 1.7;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 18px;
+      margin: 34px 0 24px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 18px 50px rgba(0,0,0,.18);
+    }
+    .icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+    .card h2 { margin: 0 0 9px; font-size: 1.45rem; }
+    .card p { color: var(--muted); line-height: 1.6; min-height: 74px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 54px;
+      border-radius: 14px;
+      padding: 12px 18px;
+      font-weight: 900;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: transform .15s ease, filter .15s ease;
+    }
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.07); }
+    .btn-wa {
+      color: #082016;
+      background: var(--lime);
+    }
+    .btn-survey {
+      color: #081327;
+      background: var(--cyan);
+    }
+    .trust {
+      text-align: center;
+      margin: 26px auto 0;
+      max-width: 730px;
+      padding: 22px;
+      border: 1px dashed rgba(255,255,255,.22);
+      border-radius: 18px;
+      background: rgba(0,0,0,.12);
+    }
+    .trust strong { color: var(--lime); }
+    .footer {
+      text-align: center;
+      color: #8fa5ba;
+      font-size: .9rem;
+      margin-top: 22px;
+    }
+    @media (max-width: 700px) {
+      .cards { grid-template-columns: 1fr; }
+      .card p { min-height: 0; }
+    }
+  
+    .survey {
+      margin-top: 34px;
+      background: rgba(5, 18, 34, .9);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 26px;
+      padding: clamp(22px, 4vw, 42px);
+      box-shadow: 0 18px 50px rgba(0,0,0,.22);
+    }
+    .survey-head { text-align:center; max-width:760px; margin:0 auto 30px; }
+    .survey-head h2 { margin:14px 0 10px; font-size:clamp(2rem,5vw,3.4rem); }
+    .survey-head p { color:var(--muted); line-height:1.7; }
+    .field-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+    label span, .survey-question h3, .survey-question legend { font-weight:800; }
+    label > span { display:block; margin-bottom:7px; }
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+      width:100%; color:var(--white); background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.16); border-radius:12px;
+      padding:13px 14px; font:inherit; outline:none;
+    }
+    textarea { min-height:120px; resize:vertical; }
+    input:focus, select:focus, textarea:focus { border-color:var(--cyan); }
+    .survey-question { border:0; padding:0; margin:28px 0; }
+    .survey-question h3 { margin:0 0 7px; }
+    .survey-question p { color:var(--muted); line-height:1.6; }
+    .survey-question legend { padding:0; margin-bottom:12px; }
+    .survey-question small { color:var(--muted); font-weight:500; }
+    .checks { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px 16px; }
+    .checks label {
+      display:flex; gap:9px; align-items:flex-start; color:#e2edf8;
+      font-weight:500; line-height:1.4;
+    }
+    .checks input { margin-top:4px; accent-color:var(--cyan); }
+    .form-note, .form-message { color:#8fa5ba; font-size:.9rem; line-height:1.5; margin-top:14px; }
+    .form-message { color:var(--lime); font-weight:700; }
+    @media(max-width:700px){
+      .field-grid,.checks{grid-template-columns:1fr;}
+    }
+
+  
+    .summary {
+      margin-top: 28px;
+      padding: 28px;
+      background: rgba(255,255,255,.045);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+    }
+    .summary-head { text-align:center; margin-bottom:22px; }
+    .summary-head h2 { margin:12px 0 0; font-size:clamp(1.7rem,4vw,2.7rem); }
+    .summary-grid {
+      display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px;
+    }
+    .summary-grid div {
+      display:flex; flex-direction:column; gap:7px;
+      padding:18px; border-radius:16px; background:rgba(0,0,0,.14);
+    }
+    .summary-grid strong { color:var(--lime); }
+    .summary-grid span { color:var(--muted); line-height:1.5; font-size:.95rem; }
+    .summary-note {
+      margin-top:18px; text-align:center; color:var(--muted);
+      line-height:1.6; padding:16px; border-radius:14px;
+      background:rgba(49,230,255,.06);
+    }
+    .summary-note strong { color:var(--white); }
+    .survey-panel {
+      margin-top:28px; background:rgba(5,18,34,.96);
+      border:1px solid rgba(255,255,255,.14); border-radius:26px;
+      padding:clamp(22px,4vw,42px);
+    }
+    .survey-panel[hidden] { display:none; }
+    .close-survey {
+      background:transparent; border:0; color:var(--cyan);
+      font:inherit; font-weight:800; cursor:pointer; padding:0; margin-bottom:18px;
+    }
+    .survey-head { text-align:center; max-width:760px; margin:0 auto 30px; }
+    .survey-head h2 { margin:14px 0 10px; font-size:clamp(2rem,5vw,3.4rem); }
+    .survey-head p { color:var(--muted); line-height:1.7; }
+    .field-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+    label span, .survey-question h3, .survey-question legend { font-weight:800; }
+    label > span { display:block; margin-bottom:7px; }
+    input[type=text], input[type=email], input[type=tel], select, textarea {
+      width:100%; color:var(--white); background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.16); border-radius:12px;
+      padding:13px 14px; font:inherit; outline:none;
+    }
+    textarea { min-height:120px; resize:vertical; }
+    .survey-question { border:0; padding:0; margin:28px 0; }
+    .survey-question h3 { margin:0 0 7px; }
+    .survey-question p { color:var(--muted); line-height:1.6; }
+    .survey-question legend { padding:0; margin-bottom:12px; }
+    .survey-question small { color:var(--muted); font-weight:500; }
+    .checks { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px 16px; }
+    .checks label { display:flex; gap:9px; align-items:flex-start; color:#e2edf8; font-weight:500; line-height:1.4; }
+    .checks input { margin-top:4px; accent-color:var(--cyan); }
+    .form-message { color:var(--lime); font-weight:700; line-height:1.5; margin-top:14px; }
+    @media(max-width:700px){
+      .summary-grid,.field-grid,.checks{grid-template-columns:1fr;}
+    }
+
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <span class="eyebrow">Student-led • Research • Innovation</span>
+      <h1><span class="gradient">AI RESEARCH CLUB</span></h1>
+      <p class="tagline">Join. Collaborate. Innovate.</p>
+      <p class="intro">
+        AI Research Club is a student community built around <strong>curiosity, ambition and action</strong>.
+        Explore real-world problems, collaborate across disciplines, learn the skills you need along the way,
+        and turn ideas into research, projects, innovations and opportunities.
+        <br><br>
+        <strong>You do not need to be an AI expert or brilliant coder to belong here.</strong>
+        Come as you are. Bring your idea, your curiosity and your vision.
+      </p>
+    </section>
+
+    <section class="cards" aria-label="Ways to join">
+      <article class="card">
+        <div class="icon">💬</div>
+        <h2>Join the WhatsApp Community</h2>
+        <p>
+          Meet students, discover ideas and opportunities, and become part of the AI Research Club community.
+        </p>
+        <a class="btn btn-wa"
+           href="https://chat.whatsapp.com/F4qzBhu5oyLGLj7ns7xBvd"
+           target="_blank" rel="noopener">
+          JOIN THE WHATSAPP COMMUNITY
+        </a>
+      </article>
+
+      <article class="card">
+        <div class="icon">🎯</div>
+        <h2>Tell Us Where You Want to Go</h2>
+        <p>
+          Take the short interest survey to tell us what you're studying, what excites you,
+          where you want to grow and how you'd like to participate.
+        </p>
+        <a class="btn btn-survey" href="https://docs.google.com/forms/d/e/1FAIpQLSdnkzs73L4TpOiHDp0L8xiOeQfxxFrRsYQR_iFcG51hdlGCWA/viewform" target="_blank" rel="noopener" id="openSurveyBtn">
+          TAKE THE 2-MINUTE SURVEY
+        </a>
+      </article>
+    </section>
+
+    <section class="trust">
+      <strong>Come as you are.</strong><br />
+      Bring us your idea, your curiosity and your vision.<br />
+      We'll help you build the skills you need along the way.
+    </section>
+
+    
+
+    <section class="summary">
+      <div class="summary-head">
+        <span class="eyebrow">What we're building</span>
+        <h2>EXPLORE. RESEARCH. BUILD. GROW.</h2>
+      </div>
+      <div class="summary-grid">
+        <div><strong>🔍 Explore</strong><span>Find meaningful problems and discover where AI can make a difference.</span></div>
+        <div><strong>🤝 Collaborate</strong><span>Work with students from different disciplines, backgrounds and skill levels.</span></div>
+        <div><strong>📚 Research</strong><span>Turn questions and ideas into research, publications and new knowledge.</span></div>
+        <div><strong>🚀 Build</strong><span>Develop solutions, prototypes, startups, innovations and opportunities.</span></div>
+      </div>
+      <div class="summary-note">
+        <strong>Not an expert? That's okay.</strong> Skills are built along the way.
+        What matters is your zeal, ambition, curiosity and desire to contribute.
+      </div>
+    </section>
+
+    <div class="footer">AI Research Club • Explore • Research • Build • Grow</div>
+  </main>
+
+
+
+</body>
+</html>
